@@ -3,77 +3,97 @@ package io.github.premwadhwani24.resumeanalyzer.resumeanalyzer.Job;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents a Job entity containing job details like title, description, and required skills.
+ * This acts as a POJO (Plain Old Java Object) used for job recommendations.
+ */
 public class Job {
-    // The title of the job position
+
+    /** Title of the job position */
     private String title;
 
-    // A detailed description of the job
+    /** Detailed description about the job role */
     private String description;
 
-    // A list of required skills for the job (e.g., Java, Spring Boot, etc.)
+    /** List of required skills for the job (e.g., Java, Spring Boot, SQL) */
     private List<String> requiredSkills;
 
-    // Default constructor (used by frameworks like Spring for object creation)
-    public Job() {
-    }
+    /** No-argument constructor (required for frameworks like Spring) */
+    public Job() {}
 
-    // Parameterized constructor to initialize JobPOJO with specific values
+    /**
+     * Parameterized constructor to initialize a Job object.
+     *
+     * @param title          Title of the job
+     * @param description    Detailed job description
+     * @param requiredSkills List of skills needed for this job
+     */
     public Job(String title, String description, List<String> requiredSkills) {
         this.title = title;
         this.description = description;
         this.requiredSkills = requiredSkills;
     }
 
-    // Getter for the title field
+    // Getters and Setters
+
     public String getTitle() {
         return title;
     }
 
-    // Setter for the title field
     public void setTitle(String title) {
         this.title = title;
     }
 
-    // Getter for the description field
     public String getDescription() {
         return description;
     }
 
-    // Setter for the description field
     public void setDescription(String description) {
         this.description = description;
     }
 
-    // Getter for the requiredSkills field
     public List<String> getRequiredSkills() {
         return requiredSkills;
     }
 
-    // Setter for the requiredSkills field
     public void setRequiredSkills(List<String> requiredSkills) {
         this.requiredSkills = requiredSkills;
     }
 
-    // Overriding equals() to compare two JobPOJO objects based on their title, description, and requiredSkills
+    /**
+     * Checks if two Job objects are equal based on title, description, and required skills.
+     *
+     * @param o Object to compare with
+     * @return true if all fields match, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) return true;
+        if (!(o instanceof Job)) return false;
         Job job = (Job) o;
-        return Objects.equals(title, job.title) &&
-                Objects.equals(description, job.description) &&
-                Objects.equals(requiredSkills, job.requiredSkills);
+        return Objects.equals(title, job.title)
+                && Objects.equals(description, job.description)
+                && Objects.equals(requiredSkills, job.requiredSkills);
     }
 
-    // Overriding hashCode() for hashing purposes. It helps in efficient searching and retrieval (used by HashMap, HashSet, etc.)
+    /**
+     * Generates hash code based on title, description, and required skills.
+     *
+     * @return int hash code value
+     */
     @Override
     public int hashCode() {
         return Objects.hash(title, description, requiredSkills);
     }
 
-    // Overriding toString() to return a string representation of the JobPOJO object, useful for logging and debugging
+    /**
+     * Returns a string representation of the Job object.
+     *
+     * @return String describing the job
+     */
     @Override
     public String toString() {
-        return "JobPOJO{" +
+        return "Job{" +
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", requiredSkills=" + requiredSkills +
