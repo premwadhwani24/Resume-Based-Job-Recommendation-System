@@ -7,6 +7,7 @@ import java.util.List;
 public interface JobService {
 
     Job createJob(Job job);
+
     List<Job> getAllJobs();
 
     Job getJobById(long id);
@@ -22,4 +23,7 @@ public interface JobService {
     Job getJobBySkills(String skills);
 
     Job getJobByExperience(String experience);
+
+    List<Job> getJobsBySkillsRequired(String skill);
+    List<Job> getJobsByLocation(String location);
 }

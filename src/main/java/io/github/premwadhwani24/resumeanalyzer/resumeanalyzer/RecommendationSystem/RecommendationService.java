@@ -1,21 +1,23 @@
 package io.github.premwadhwani24.resumeanalyzer.resumeanalyzer.RecommendationSystem;
 
+import io.github.premwadhwani24.resumeanalyzer.resumeanalyzer.Job.Job;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public interface RecommendationService<Recommendation, Recommedation, Recmmendation> {
+public interface RecommendationService {
 
-    Recommendation createRecommendation(Recommendation recommendation);
+    List<Job> recommendJobsForUser(String username);
 
-    List<Recommendation> getAllRecommendation();
+    RecommendationSystem createRecommendation(RecommendationSystem recommendation);
 
-    Recommedation getRecommendationByTitle(String Title);
+    List<RecommendationSystem> getAllRecommendation();
 
-    Recommendation getRecommendationByComany(String Company);
+    List<RecommendationSystem> getRecommendationByTitle(String title);
 
-    Recmmendation getRecommendationBySkills(String skills);
+    List<RecommendationSystem> getRecommendationByCompany(String company);
 
-    Recommendation getRecommendationySkillsRequired(String skillsRequired);
+    List<RecommendationSystem> getRecommendationBySkills(String skills);
+
+    List<RecommendationSystem> getRecommendationBySkillsRequired(String skillsRequired);
 }
-
