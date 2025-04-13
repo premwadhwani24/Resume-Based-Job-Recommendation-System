@@ -1,34 +1,146 @@
 package io.github.premwadhwani24.resumeanalyzer.resumeanalyzer.Job;
 
-import java.io.Serial;
-import java.io.Serializable;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents a Job entity containing details like title, description, and a list of required skills.
- * <p>
- * Immutable, thread-safe, and clearly defining its responsibility as a DTO.
- *
- * @param title          Title of the job position (non-null)
- * @param description    Detailed description about the job role (non-null)
- * @param requiredSkills Unmodifiable list of required skills for the job (non-null)
+ * Job entity represents the job data stored in the database for the resume analyzer.
  */
-public record Job(String title, String description, List<String> requiredSkills)
-        implements Serializable {
+@Entity
+@Table(name = "jobs")
+public class Job {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Job(String title, String description, List<String> requiredSkills) {
-        Objects.requireNonNull(title, "Job title must not be null");
-        Objects.requireNonNull(description, "Job description must not be null");
-        Objects.requireNonNull(requiredSkills, "Required skills must not be null");
+    @NotBlank(message = "Job title cannot be empty.")
+    private String title;
 
-        requiredSkills = List.copyOf(requiredSkills);
-        this.title = title;
-        this.description = description;
-        this.requiredSkills = requiredSkills;
+    @NotBlank(message = "Qualification cannot be empty.")
+    private String qualification;
+
+    @ElementCollection
+    @CollectionTable(name = "job_skills", joinColumns = @JoinColumn(name = "job_id"))
+    @Column(name = "skill")
+    private List<String> skillSet;
+
+    @NotBlank(message = "Experience field is required.")
+    private String experience;
+
+    @NotBlank(message = "Location cannot be empty.")
+    private String location;
+
+    @NotBlank(message = "Salary range must be provided.")
+    private String salaryRange;
+
+    @NotBlank(message = "Contact details are required.")
+    private String contactDetails;
+
+    public Job() {
     }
 
+    public Job(String title, String qualification, List<String> skillSet, String experience, String location, String salaryRange, String contactDetails) {
+        this.title = title;
+        this.qualification = qualification;
+        this.skillSet = skillSet;
+        this.experience = experience;
+        this.location = location;
+        this.salaryRange = salaryRange;
+        this.contactDetails = contactDetails;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getQualification() {
+        return qualification;
+    }
+
+    public void setQualification(String qualification) {
+        this.qualification = qualification;
+    }
+
+    public List<String> getSkillSet() {
+        return skillSet;
+    }
+
+    public void setSkillSet(List<String> skillSet) {
+        this.skillSet = skillSet;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getSalaryRange() {
+        return salaryRange;
+    }
+
+    public void setSalaryRange(String salaryRange) {
+        this.salaryRange = salaryRange;
+    }
+
+    public String getContactDetails() {
+        return contactDetails;
+    }
+
+    public void setContactDetails(String contactDetails) {
+        this.contactDetails = contactDetails;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Job)) return false;
+        Job job = (Job) o;
+        return Objects.equals(id, job.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Job{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", qualification='" + qualification + '\'' +
+                ", skillSet=" + skillSet +
+                ", experience='" + experience + '\'' +
+                ", location='" + location + '\'' +
+                ", salaryRange='" + salaryRange + '\'' +
+                ", contactDetails='" + contactDetails + '\'' +
+                '}';
+    }
 }
