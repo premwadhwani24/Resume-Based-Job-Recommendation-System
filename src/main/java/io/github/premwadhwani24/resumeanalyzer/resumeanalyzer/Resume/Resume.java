@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor // Constructor initializing all fields
 @ToString // Provides a descriptive string representation
 @EqualsAndHashCode(onlyExplicitlyIncluded = true) // Equals and hashCode based only on id
-public class Resume {
+class Resume {
 
     // Primary key generated automatically
     @Id
