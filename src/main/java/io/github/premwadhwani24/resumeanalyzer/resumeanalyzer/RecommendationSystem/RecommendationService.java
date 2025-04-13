@@ -1,7 +1,9 @@
 package io.github.premwadhwani24.resumeanalyzer.resumeanalyzer.RecommendationSystem;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+@Service
 public interface RecommendationService<Recommendation, Recommedation, Recmmendation> {
 
     Recommendation createRecommendation(Recommendation recommendation);
@@ -16,3 +18,4 @@ public interface RecommendationService<Recommendation, Recommedation, Recmmendat
 
     Recommendation getRecommendationySkillsRequired(String skillsRequired);
 }
+
