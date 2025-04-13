@@ -7,6 +7,9 @@ import jakarta.validation.constraints.PastOrPresent;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 // Entity representing a user's uploaded resume
 @Entity
@@ -41,4 +44,14 @@ public class Resume {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    // Method to get skills as a list of strings
+    public List<String> getSkills(String s) {
+        // If parsedSkills is null or empty, return an empty list
+        if (parsedSkills == null || parsedSkills.isEmpty()) {
+            return new ArrayList<>();
+        }
+        // Split the parsedSkills string by commas and return as a list
+        return Arrays.asList(parsedSkills.split(","));
+    }
 }

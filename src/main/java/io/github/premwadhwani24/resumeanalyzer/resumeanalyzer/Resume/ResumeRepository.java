@@ -10,4 +10,6 @@ public interface ResumeRepository extends JpaRepository<Resume, Long> {
     Optional<Resume> findByUserEmail(String email); // Use user.email to filter
 
     Optional<Resume> findByParsedSkillsContainingIgnoreCase(String skills);
+
+    Optional<Resume> findByUsernameIgnoreCase(String username);
 }
