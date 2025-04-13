@@ -4,13 +4,12 @@ import io.github.premwadhwani24.resumeanalyzer.resumeanalyzer.User.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * Represents a Resume entity that stores uploaded resume details,
- * including the file name, parsed skills, upload date, and the user who uploaded it.
+ * Represents a Resume entity containing details about the uploaded resume,
+ * parsed skills, upload date, and the user who uploaded it.
  * This entity is mapped to the "resumes" table in the database.
  */
 @Entity
@@ -34,15 +33,23 @@ public class Resume {
     @PastOrPresent(message = "Upload date must be today or in the past.")
     private LocalDate uploadedAt;
 
-    /** The user who uploaded the resume. Linked through foreign key user_id. */
+    /** The user who uploaded the resume. Linked via foreign key user_id. */
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    /** Default constructor. Required by JPA. */
+    /** No-argument constructor (required by JPA) */
     public Resume() {}
 
-    /** Parameterized constructor for convenience. */
+    /**
+     * Parameterized constructor to initialize a Resume object.
+     *
+     * @param id            Unique resume identifier
+     * @param fileName      Name of the uploaded file
+     * @param parsedSkills  Extracted skills from the resume
+     * @param uploadedAt    Date when the resume was uploaded
+     * @param user          The user who uploaded the resume
+     */
     public Resume(Long id, String fileName, String parsedSkills, LocalDate uploadedAt, User user) {
         this.id = id;
         this.fileName = fileName;
@@ -94,23 +101,27 @@ public class Resume {
     }
 
     /**
-     * Checks if two Resume objects are equal based on their fields.
+     * Compares two Resume objects based on their fields.
+     *
+     * @param o Object to compare with
+     * @return true if all fields match, false otherwise
      */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (!(o instanceof Resume)) return false;
         Resume resume = (Resume) o;
-        return Objects.equals(id, resume.id) &&
-                Objects.equals(fileName, resume.fileName) &&
-                Objects.equals(parsedSkills, resume.parsedSkills) &&
-                Objects.equals(uploadedAt, resume.uploadedAt) &&
-                Objects.equals(user, resume.user);
+        return Objects.equals(id, resume.id)
+                && Objects.equals(fileName, resume.fileName)
+                && Objects.equals(parsedSkills, resume.parsedSkills)
+                && Objects.equals(uploadedAt, resume.uploadedAt)
+                && Objects.equals(user, resume.user);
     }
 
     /**
-     * Generates a hash code based on the resume's fields.
+     * Generates hash code based on all resume fields.
+     *
+     * @return int hash code value
      */
     @Override
     public int hashCode() {
@@ -119,6 +130,8 @@ public class Resume {
 
     /**
      * Returns a string representation of the Resume object.
+     *
+     * @return String describing the resume
      */
     @Override
     public String toString() {
