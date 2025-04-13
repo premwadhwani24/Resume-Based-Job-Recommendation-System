@@ -20,12 +20,15 @@ public record Job(String title, String description, List<String> requiredSkills)
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public Job {
+    public Job(String title, String description, List<String> requiredSkills) {
         Objects.requireNonNull(title, "Job title must not be null");
         Objects.requireNonNull(description, "Job description must not be null");
         Objects.requireNonNull(requiredSkills, "Required skills must not be null");
 
         requiredSkills = List.copyOf(requiredSkills);
+        this.title = title;
+        this.description = description;
+        this.requiredSkills = requiredSkills;
     }
 
 }
