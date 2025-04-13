@@ -1,6 +1,9 @@
 package io.github.premwadhwani24.resumeanalyzer.resumeanalyzer.Resume;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
+@Service
 public interface ResumeService {
 
     Resume createResume(Resume resume);
